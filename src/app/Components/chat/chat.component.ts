@@ -21,6 +21,9 @@ export class ChatComponent {
     technologies:"",
     goals:""
   }
+  learningPathQuery = {
+    query:''
+  }
   isLearningPath = false;
   constructor(
     private router: Router,
@@ -31,10 +34,12 @@ export class ChatComponent {
   ngOnInit(){
     this.username = this.chat.profileUsername;
     this.profileData.technologies = this.chat.profileData.technologies;
+    this.learningPathQuery.query = this.chat.profileData.technologies
     this.profileData.goals = this.chat.profileData.goals;
   }
   learningPath(){
     this.isLearningPath = true;
+    this.sendMessage();
   }
   generatePDF(){
     let pdfDocument = {
@@ -44,7 +49,7 @@ export class ChatComponent {
   }
   sendMessage() {
     if(this.isLearningPath){
-        this.chat.generateLearningPath(this.profileData).subscribe((params:any)=>{
+        this.chat.generateLearningPath(this.learningPathQuery).subscribe((params:any)=>{
           this.messages.push({ text: params.result, isUser: false });
         },(error)=>{
 
