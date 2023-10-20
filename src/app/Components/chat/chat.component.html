@@ -1,0 +1,40 @@
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Hi {{username}}!</a>
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex margin-left" role="search">
+          <!-- <input class="form-control me-2 display-none" type="search" placeholder="Search" aria-label="Search"> -->
+          <button class="btn btn-outline-success me-2" type="submit" (click)="learningPath()">Generate Learning Path</button>
+          <button class="btn btn-outline-success me-2" type="submit" (click)="generatePDF()">Generate PDF</button>
+          <button class="btn btn-outline-success me-2 profile-button" type="submit" (click)="onProfile()">Go to Profile</button>
+          <button class="btn btn-outline-success me-2" type="submit" (click)="onLogout()">logout</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- For Q and A -->
+  <div class="chat-container">
+    <div class="chat-header">
+      <img src="assets/chatbot.png" alt="Chatbot Avatar" class="avatar">
+      <h2>Chatbot</h2>
+    </div>
+    <div class="chat-messages">
+      <div *ngFor="let message of messages" class="chat-message" [ngClass]="{'user': message.isUser, 'bot': !message.isUser}">
+        {{ message.text }}
+      </div>
+    </div>
+    <div class="margin-top">
+    <input
+      type="text"
+      [(ngModel)]="message.query"
+      placeholder="Type a message..."
+    />
+    <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  
+  
