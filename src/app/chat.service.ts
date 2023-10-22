@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient ,HttpHeaders } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +21,38 @@ export class ChatService {
     return this.http.post("http://localhost:8000/login/",data)
   }
   logout(){
-    return this.http.get("http://localhost:8000/logout/")
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get("http://localhost:8000/logout/",{headers})
   }
   bot(data:any){
-    return this.http.post("http://localhost:8000/bot/",data)
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post("http://localhost:8000/bot/",data,{headers})
   }
-  profile(){
-    return this.http.get("http://localhost:8000/profile/")
+  profile(data:any){
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put("http://localhost:8000/user/",data,{headers})
+  }
+  profileDetails(){
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get("http://localhost:8000/user/",{headers})
   }
   generateLearningPath(data:any){
-    return this.http.post("http://localhost:8000/bot/",data)
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post("http://localhost:8000/generate_learning_path/",data,{headers})
   }
 }

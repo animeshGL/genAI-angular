@@ -24,6 +24,7 @@
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="text" name="txt" placeholder="User name" required="" [(ngModel)]="loginObj.username">
 					<input type="password" name="pswd" placeholder="Password" required="" [(ngModel)]="loginObj.password">
+					<span class="alert" *ngIf="isAlert">Incorrect Username or Password!</span>
 					<button (click)="onLogin()">Login</button>
 				</form>
 			</div>

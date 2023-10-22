@@ -17,18 +17,29 @@ export class ProfileComponent {
     private router:Router){}
 
   ngOnInit(){
-    this.profileUsername = this.chat.username;
-    this.profileEmail = this.chat.email;
+    this.getProfileDetails();
+  }
+  getProfileDetails(){
+    this.chat.profileDetails().subscribe((params:any)=>{
+      this.profileUsername = params.username;
+      this.profileEmail = params.email;
+      this.profileData.technologies = params.technologies;
+      this.profileData.goals = params.goals;
+    })
   }
   onSave(){
+    this.chat.profile(this.profileData).subscribe((param:any)=>{
     this.chat.profileUsername = this.profileUsername;
     this.chat.profileEmail = this.profileEmail;
     this.chat.profileData.technologies = this.profileData.technologies;
     this.chat.profileData.goals = this.profileData.goals;
     this.router.navigate(['/chat']);
+    },(error)=>{
+    
+    });
   }
   profile(){
-    this.chat.profile().subscribe((param:any)=>{
+    this.chat.profile(this.profileData).subscribe((param:any)=>{
       
     },(error)=>{
     

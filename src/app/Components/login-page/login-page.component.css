@@ -88,3 +88,8 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+.alert{
+	margin-left: 58px;
+    font-size: 14px;
+    color: red;
+}

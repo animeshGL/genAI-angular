@@ -18,6 +18,7 @@ export class LoginPageComponent {
     username: '',
     password: ''
   }
+  isAlert = false;
   constructor(
     private router: Router,
     private chat: ChatService
@@ -29,10 +30,13 @@ export class LoginPageComponent {
     this.chat.login(this.loginObj).subscribe((data:any)=>{
       this.chat.username = this.loginObj.username;
       this.chat.email = this.loginObj.email;
+      const token = data.access_token
+      localStorage.setItem('authToken', token);
+      this.isAlert = false;
       this.router.navigate(['/profile']);
       
     },(error)=>{
-    
+      this.isAlert = true;
     });
   }
   onSignUp(){
@@ -40,6 +44,8 @@ export class LoginPageComponent {
     this.chat.signUp(this.signupObj).subscribe((data:any)=>{
       this.chat.username = this.signupObj.username;
       this.chat.email = this.signupObj.email;
+      const signUpToken = data.access_token
+      localStorage.setItem('authToken', signUpToken);
       this.router.navigate(['/profile']);
     })
   }

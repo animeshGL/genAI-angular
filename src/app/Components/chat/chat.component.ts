@@ -25,6 +25,7 @@ export class ChatComponent {
     query:''
   }
   isLearningPath = false;
+  isLoader = false;
   constructor(
     private router: Router,
     private chat: ChatService
@@ -49,19 +50,27 @@ export class ChatComponent {
   }
   sendMessage() {
     if(this.isLearningPath){
+        this.onClear();
+        this.messages.push({ text: 'Generating Learning Path...', isUser: true });
+        this.isLoader = true;
         this.chat.generateLearningPath(this.learningPathQuery).subscribe((params:any)=>{
           this.messages.push({ text: params.result, isUser: false });
+          this.isLoader = false;
         },(error)=>{
-
+          this.isLoader = false;
         });
+        this.isLearningPath = false;
     } else {
         if (this.message.query.trim() !== '') {
           this.messages.push({ text: this.message.query, isUser: true });
+          this.isLoader = true;
           // Simulate the chatbot's response (replace with actual bot logic)
           this.chat.bot(this.message).subscribe((data:any)=>{
+            this.message = [];
           this.messages.push({ text: data.result, isUser: false });
+          this.isLoader = false;
         },(error)=>{
-      
+          this.isLoader = false;
         });
        this.userMessage = '';
       }
@@ -70,9 +79,15 @@ export class ChatComponent {
   onLogout(){
     this.chat.logout().subscribe(()=>{
     })
+    localStorage.removeItem('authToken')
     this.router.navigate(['/login']);
   }
   onProfile(){
     this.router.navigate(['/profile']);
+  }
+  onClear(){
+    this.messages = [];
+    this.message = [];
+    this.isLoader = false;
   }
 }

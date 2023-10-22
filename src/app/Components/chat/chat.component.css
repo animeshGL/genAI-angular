@@ -112,7 +112,7 @@ body, h1, p {
   }
 
   .chat-container {
-    width: 300px;
+    width: 90%;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -122,12 +122,13 @@ body, h1, p {
     position: fixed;
     bottom: 20px; /* Adjust the distance from the bottom as needed */
     right: 20px; /* Adjust the distance from the right as needed */
+    margin-right: 3.5rem;
   }
   
   .chat-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 10px;
   }
   
@@ -136,6 +137,9 @@ body, h1, p {
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+  }
+  .avatar-1{
+    visibility: hidden;
   }
   
   .chat-messages {
@@ -174,7 +178,7 @@ body, h1, p {
     outline: none;
   }
   
-  button {
+  .button {
     width: 100%;
     padding: 10px;
     border: none;
@@ -186,11 +190,11 @@ body, h1, p {
     outline: none;
   }
   
-  button:hover {
+  .button:hover {
     background-color: #45a049;
   }
-  .margin-left{
-    margin-left: 54rem;
+  .margin-left-auto{
+    margin-left: auto;
   }
   .display-none{
     display: none;
